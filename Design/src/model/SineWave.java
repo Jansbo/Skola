@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.Map;
 import java.util.TreeMap;
 
+import domain1.DataSource;
+
 public class SineWave implements DataSource {
 
 	@Override
