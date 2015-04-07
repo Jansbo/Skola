@@ -81,7 +81,7 @@ public class DataMatcherTest {
 
 	}
 
-	//@Test
+	@Test
 	public void testMatching() {
 
 		System.out.println("source1 " + source1.getData().keySet().toString());

@@ -7,14 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-
-
 public class DataMatcher {
 
 	private final DataSource source1;
 	private final DataSource source2;
 	private final Resolution resolution;
 
+	
 	public DataMatcher(DataSource source1, DataSource source2,
 			Resolution resolution) {
 		this.source1 = source1;
@@ -42,10 +41,10 @@ public class DataMatcher {
 	//		}
 			
 		for (LocalDate date1 : source1.getData().keySet()) {
-			System.out.println("date 1 " + date1.toString());
+			//System.out.println("date 1 " + date1.toString());
 			
 			for (LocalDate date2 : source2.getData().keySet()) {
-				System.out.println("date 2  " + date2.toString());
+				//System.out.println("date 2  " + date2.toString());
 				
 					if(isMatching(date1, date2)){
 					System.out.println("matchad");
