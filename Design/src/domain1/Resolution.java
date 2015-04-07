@@ -20,7 +20,7 @@ public enum Resolution {
 		
 			System.out.println("WEEK");
 			WeekFields week = WeekFields.of(Locale.getDefault());
-//
+
 			System.out.println(d1.get(week.weekOfWeekBasedYear()));
 			System.out.println(d2.get(week.weekOfWeekBasedYear()));
 		

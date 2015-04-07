@@ -23,7 +23,7 @@ public class JsonToMapParserTest {
 
 	sine = new SineWave();
 	football = new FootballGoalsSource();
-	matcher = new DataMatcher(sine, football, Resolution.MONTH);
+	
 	}
 
 
@@ -37,12 +37,14 @@ public class JsonToMapParserTest {
 	@Test
 	public void testMatcher(){
 		Map <String, DataPair> pair = new HashMap();
+		 matcher = new DataMatcher(sine, football, Resolution.YEAR);
+		pair = matcher.matchData().getData();
 		
-		//pair.get(matcher.matchData().getData());
-		System.out.println("pairData test  " + matcher.matchData().getData().toString());
-		System.out.println("Pair  "  +pair.get("2014-05-01").toString());
-		assertEquals(new Double( 2.0), pair.get("2014-05-01").getX() );
-		assertEquals(new Double( 2.0), pair.get("2014-05-01").getY() );
+			//	System.out.println("pairData test  " + matcher.matchData().getData().toString());
+		//System.out.println("Pair  "  +pair.get("2014-05-01").toString());
+	//	assertEquals(new Double(2.0), pair.get("2014-12-01").getX() );
+		assertEquals(new Double(12.0), ((DataPair) pair).getY());
+		
 		
 	}
 }
