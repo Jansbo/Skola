@@ -99,22 +99,38 @@ public class DataMatcherTest {
 	@Test
 	public void testResolutionWeek() {
 		matcher = new DataMatcher(source1, source2, Resolution.WEEK);
-		assertTrue(matcher.isMatching(LocalDate.parse("2012-01-02"), LocalDate.parse("2012-01-07")));
+		assertTrue(matcher.isMatching(LocalDate.parse("2015-01-02"), LocalDate.parse("2015-01-04")));
+		assertTrue(matcher.isMatching(LocalDate.parse("2010-03-22"), LocalDate.parse("2010-03-27")));
+		assertTrue(matcher.isMatching(LocalDate.parse("2014-06-07"), LocalDate.parse("2014-06-03")));
+		assertTrue(matcher.isMatching(LocalDate.parse("2013-10-26"), LocalDate.parse("2013-10-22")));
 		assertFalse(matcher.isMatching(LocalDate.parse("2013-02-02"), LocalDate.parse("2013-02-20")));
+		assertFalse(matcher.isMatching(LocalDate.parse("2011-05-02"), LocalDate.parse("2013-09-20")));
 
 	}
 	
 	@Test
 	public void testResolutionMonth(){
 		matcher = new DataMatcher(source1, source2, Resolution.MONTH);
-		assertTrue(matcher.isMatching(LocalDate.parse("2012-02-02"), LocalDate.parse("2012-02-07")));
-		assertFalse(matcher.isMatching(LocalDate.parse("2013-06-02"), LocalDate.parse("2013-08-20")));
+		assertTrue(matcher.isMatching(LocalDate.parse("2012-01-02"), LocalDate.parse("2012-01-07")));
+		assertTrue(matcher.isMatching(LocalDate.parse("2009-08-30"), LocalDate.parse("2010-08-20")));
+		assertTrue(matcher.isMatching(LocalDate.parse("2001-12-14"), LocalDate.parse("2006-12-07")));
+		assertFalse(matcher.isMatching(LocalDate.parse("2013-07-25"), LocalDate.parse("2013-04-20")));
 	}
 	
 	@Test 
 	public void testResolutionYear(){
 		matcher = new DataMatcher(source1, source2, Resolution.YEAR);
 		assertTrue(matcher.isMatching(LocalDate.parse("2012-02-02"), LocalDate.parse("2012-02-07")));
+		assertTrue(matcher.isMatching(LocalDate.parse("2000-10-02"), LocalDate.parse("2000-04-07")));
+		assertTrue(matcher.isMatching(LocalDate.parse("1995-01-02"), LocalDate.parse("1995-12-07")));
 		assertFalse(matcher.isMatching(LocalDate.parse("2013-06-02"), LocalDate.parse("2014-08-20")));
+	}
+	
+	@Test
+	public void testResolutionQuarter(){
+		matcher = new DataMatcher(source1, source2, Resolution.QUARTER);
+		assertTrue(matcher.isMatching(LocalDate.parse("2001-02-02"), LocalDate.parse("2012-03-07")));
+		assertTrue(matcher.isMatching(LocalDate.parse("2003-01-02"), LocalDate.parse("2008-03-07")));
+		assertFalse(matcher.isMatching(LocalDate.parse("2013-02-02"), LocalDate.parse("2014-08-20")));
 	}
 }

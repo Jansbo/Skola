@@ -9,7 +9,6 @@ public enum Resolution {
 
 		@Override
 		public boolean isMatched(LocalDate d1, LocalDate d2) {
-			System.out.println("DAY");
 			return d1.equals(d2);
 		}
 	},
@@ -17,13 +16,8 @@ public enum Resolution {
 	WEEK {
 		@Override
 		public boolean isMatched(LocalDate d1, LocalDate d2) {
-		
-			System.out.println("WEEK");
 			WeekFields week = WeekFields.of(Locale.getDefault());
 
-			System.out.println(d1.get(week.weekOfWeekBasedYear()));
-			System.out.println(d2.get(week.weekOfWeekBasedYear()));
-		
 			return d1.get(week.weekOfWeekBasedYear()) == d2.get(week.weekOfWeekBasedYear());
 
 		}
@@ -33,7 +27,7 @@ public enum Resolution {
 	MONTH {
 		@Override
 		public boolean isMatched(LocalDate d1, LocalDate d2) {
-			System.out.println("MONTH");
+			
 			
 			return d1.getMonth().equals(d2.getMonth());
 		}
@@ -42,12 +36,9 @@ public enum Resolution {
 	QUARTER {
 		@Override
 		public boolean isMatched(LocalDate d1, LocalDate d2) {
-			System.out.println("QUARTER");
-			System.out.println(d1.getMonth().toString());
-			System.out.println(d2.getMonth().toString());
-			boolean check;
-			int first = d1.getMonthValue() /3;
-			int second = d2.getMonthValue() /3;
+			
+			int first = (d1.getMonthValue() -1) /3;
+			int second = (d2.getMonthValue() -1) /3;
 			
 //			if( first > 0 < 1 && second > 0 < 1){
 //				check = true;
@@ -60,7 +51,7 @@ public enum Resolution {
 //					if (first > 3 <= 4 && second > 3 <= 4 ){
 //						return true;
 //			}
-			return d1.getMonth().equals(d2.getMonth());
+			return first == second;
 		}
 
 	
