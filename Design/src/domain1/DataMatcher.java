@@ -1,7 +1,5 @@
 package domain1;
 
-
-
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +11,6 @@ public class DataMatcher {
 	private final DataSource source2;
 	private final Resolution resolution;
 
-	
 	public DataMatcher(DataSource source1, DataSource source2,
 			Resolution resolution) {
 		this.source1 = source1;
@@ -28,26 +25,24 @@ public class DataMatcher {
 	public MatchedData matchData() {
 
 		Map<String, DataPair> dateMap = new HashMap();
-			
+
 		for (LocalDate date1 : source1.getData().keySet()) {
-			//System.out.println("date 1 " + date1.toString());
-			
+
 			for (LocalDate date2 : source2.getData().keySet()) {
-				//System.out.println("date 2  " + date2.toString());
-				
-					if(isMatching(date1, date2)){
+				if (isMatching(date1, date2)) {
 					System.out.println("matchad");
-			
+
 					DataPair pair1 = new DataPair(source1.getData().get(date1),
-						source2.getData().get(date2));
-				
-				dateMap.put(date1.toString(), pair1);
-				System.out.println("date i Paret efter matchning"  + date1.toString());
-				
-				System.out.println("storlek Par "  +dateMap.size());
-			
-					}
-					
+							source2.getData().get(date2));
+
+					dateMap.put(date1.toString(), pair1);
+					System.out.println("date i Paret efter matchning"
+							+ date1.toString());
+
+					System.out.println("storlek Par " + dateMap.size());
+
+				}
+
 			}
 		}
 
@@ -55,10 +50,5 @@ public class DataMatcher {
 				source2.getUnit(), dateMap);
 		return matched;
 	}
-	
-	
 
-	
-
-	
 }
