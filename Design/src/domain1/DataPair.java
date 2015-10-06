@@ -15,4 +15,8 @@ public class DataPair {
 	public Double getY(){
 		return y;
 	}
+	public String toString(){
+		return "x:" + x + " y:" + y;
+		
+	}
 }

@@ -27,32 +27,24 @@ public class FootballGoalsSource implements DataSource {
 	@Override
 	public Map<LocalDate, Double> getData() {
 
-		// System.out.println("startar getGoals");
-		
 		UrlFetcher fetcher = new UrlFetcher(
 				"http://api.everysport.com/v1/events?apikey=1769e0fdbeabd60f479b1dcaff03bf5c&league=63925&limit=20");
 		JsonToMapParser parser = new JsonToMapParser(fetcher.getContent());
 		Map<String, Object> data = parser.getResult();
 		List<Map> events = (List<Map>) data.get("events");
 
-		// System.out.println("    !!! Events  " + events.toString() );
-		// System.out.println("Events string  " + data.get("events"));
-
 		Map<LocalDate, Double> result = new TreeMap<LocalDate, Double>();
 
 		for (Map event : (List<Map>) events) {
-		//	for (int i = 0; i< events.size(); i++){
-			// System.out.println("loop event  " + event.toString());
-
+	
 			LocalDate date = LocalDate.parse(event.get("startDate").toString()
 					.substring(0, 10));
-			System.out.println("Start datum  " + date.toString());
 			int goals = Integer.parseInt(event.get("visitingTeamScore").toString());
-		//	System.out.println("gjorda borta mål" + goals);
+		
 			goals += Integer.parseInt(event.get("homeTeamScore").toString());
 
 			addGoalsToMap(result, date, goals);
-			// System.out.println("resultat:   " + result.toString());
+			
 		}
 
 		return result;

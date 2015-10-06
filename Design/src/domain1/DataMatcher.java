@@ -3,7 +3,7 @@ package domain1;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
+
 
 public class DataMatcher {
 
@@ -24,31 +24,35 @@ public class DataMatcher {
 
 	public MatchedData matchData() {
 
-		Map<String, DataPair> dateMap = new HashMap();
+		Map<String, DataPair> dateMap = new HashMap<String, DataPair>();
+		Map<LocalDate, Double> dataSource1 = source1.getData();
+		Map<LocalDate, Double> dataSource2 = source2.getData();
+		for (LocalDate date1 : dataSource1.keySet()) {
 
-		for (LocalDate date1 : source1.getData().keySet()) {
-
-			for (LocalDate date2 : source2.getData().keySet()) {
+			for (LocalDate date2 : dataSource2.keySet()) {
 				if (isMatching(date1, date2)) {
-					System.out.println("matchad");
+					DataPair dataPair = new DataPair(averageCalcWhenMultipleMatches(dataSource1, date1),
+						averageCalcWhenMultipleMatches(dataSource2, date2));
 
-					DataPair pair1 = new DataPair(source1.getData().get(date1),
-							source2.getData().get(date2));
-
-					dateMap.put(date1.toString(), pair1);
-					System.out.println("date i Paret efter matchning"
-							+ date1.toString());
-
-					System.out.println("storlek Par " + dateMap.size());
-
+					dateMap.put(resolution.formatDate(date1), dataPair);
 				}
-
 			}
 		}
-
 		MatchedData matched = new MatchedData("", source1.getUnit(),
 				source2.getUnit(), dateMap);
 		return matched;
+	}
+	
+	private Double averageCalcWhenMultipleMatches(Map<LocalDate, Double> data, LocalDate date){
+		int extraMatchCounter = 0;
+		Double value = 0.0;
+		for (LocalDate date1 : data.keySet()) {
+			if (isMatching(date1, date)) {
+				value += data.get(date1);
+				extraMatchCounter++;
+			}
+		}		
+		return value / extraMatchCounter;
 	}
 
 }

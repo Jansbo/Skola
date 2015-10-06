@@ -22,14 +22,11 @@ public class SineWave implements DataSource {
     public Map<LocalDate, Double> getData() {
         Map<LocalDate, Double> result = new TreeMap<>();
         
-        for (int year = 2012; year < 2015; year++) {
-        	//System.out.println("year" + year);
+        for (int year = 2014; year < 2015; year++) {
         	for (int month = 1; month < 13; month++) {
-        		// System.out.println("month" + month);
+           	
         		LocalDate key = LocalDate.of(year, month, 1);
-	              
-	             
-	              result.put(key, Math.sin((key.toEpochDay() - 10957.) / 80.));
+	                result.put(key, Math.sin((key.toEpochDay() - 10957.) / 80.));
 	            }
 	        }
 	        return result;

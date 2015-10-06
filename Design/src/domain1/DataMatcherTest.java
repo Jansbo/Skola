@@ -78,12 +78,7 @@ public class DataMatcherTest {
 
 	@Test
 	public void testMatching() {
-
-		System.out.println("source1 " + source1.getData().keySet().toString());
-		System.out.println("source2 " + source2.getData().keySet().toString());
-
 		Map<String, DataPair> pair = matcher.matchData().getData();
-		System.out.println("storlek restultat Test " + pair.size());
 		assertEquals(new Double(1.2), pair.get("2012-11-11").getY());
 		assertEquals(new Double(2.2), pair.get("2012-11-11").getX());
 
@@ -97,7 +92,6 @@ public class DataMatcherTest {
 		assertTrue(matcher.isMatching(LocalDate.parse("2015-01-02"), LocalDate.parse("2015-01-04")));
 		assertTrue(matcher.isMatching(LocalDate.parse("2010-03-22"), LocalDate.parse("2010-03-27")));
 		assertTrue(matcher.isMatching(LocalDate.parse("2014-06-07"), LocalDate.parse("2014-06-03")));
-		assertTrue(matcher.isMatching(LocalDate.parse("2013-10-26"), LocalDate.parse("2013-10-22")));
 		assertFalse(matcher.isMatching(LocalDate.parse("2013-02-02"), LocalDate.parse("2013-02-20")));
 		assertFalse(matcher.isMatching(LocalDate.parse("2011-05-02"), LocalDate.parse("2013-09-20")));
 
@@ -124,8 +118,9 @@ public class DataMatcherTest {
 	@Test
 	public void testResolutionQuarter(){
 		matcher = new DataMatcher(source1, source2, Resolution.QUARTER);
-		assertTrue(matcher.isMatching(LocalDate.parse("2001-02-02"), LocalDate.parse("2012-03-07")));
+		assertTrue(matcher.isMatching(LocalDate.parse("2012-02-02"), LocalDate.parse("2012-03-07")));
 		assertTrue(matcher.isMatching(LocalDate.parse("2003-01-02"), LocalDate.parse("2008-03-07")));
+		assertTrue(matcher.isMatching(LocalDate.parse("1999-01-02"), LocalDate.parse("2000-03-07")));
 		assertFalse(matcher.isMatching(LocalDate.parse("2013-02-02"), LocalDate.parse("2014-08-20")));
 	}
 }
